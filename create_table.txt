@@ -14,6 +14,7 @@ CREATE TABLE course(
 	c_time_end VARCHAR(20),
 	c_day NUMBER,
 	c_unit NUMBER,
+	c_max NUMBER,
 	CONSTRAINT c_pk PRIMARY KEY (c_id, c_id_no)
 );
 
