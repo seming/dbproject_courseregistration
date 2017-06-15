@@ -1,5 +1,6 @@
 CREATE TABLE STUDENT
 (	s_id VARCHAR(20) not null,
+	s_pwd VARCHAR(20) not null,
 	s_name VARCHAR(20) not null,
 	s_major VARCHAR(50) not null,
 	s_grade NUMBER not null,
