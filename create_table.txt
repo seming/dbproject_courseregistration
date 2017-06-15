@@ -28,7 +28,7 @@ CREATE TABLE enroll(
     	e_semester NUMBER,
     	CONSTRAINT e_pk PRIMARY KEY (s_id, c_id, c_id_no) ,
 	CONSTRAINT e_s_fk FOREIGN KEY(s_id)
-	REFERENCES course (s_id),
+	REFERENCES student (s_id),
    	CONSTRAINT e_c_fk FOREIGN KEY (c_id, c_id_no)
    	REFERENCES  course (c_id, c_id_no)
 );
