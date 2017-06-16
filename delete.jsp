@@ -4,7 +4,8 @@
 <body>
 
 <%	
-	String s_id = (String)session.getAttribute("user");
+	String id = (String)session.getAttribute("user");
+	String session_identify= (String)session.getAttribute("identify");
 	String c_id = request.getParameter("c_id");
 	int c_id_no = Integer.parseInt(request.getParameter("c_id_no"));
 %>
@@ -30,8 +31,13 @@ try {
 }
 	
 	try  {  	
-		
-	mySQL = "Delete from enroll where c_id='" +c_id+"' and s_id ='"+s_id+"'";
+	
+		if(session_identify.equals("professor")){
+			mySQL = "Delete from teach where c_id='" +c_id+"' and c_id_no='"+c_id_no+"' and p_id ='"+id+"'";
+		}
+		else{
+			mySQL = "Delete from enroll where c_id='" +c_id+"' and s_id ='"+id+"'";
+		}
 	
 	
 	stmt.executeQuery(mySQL);
