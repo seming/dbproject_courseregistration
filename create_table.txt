@@ -1,0 +1,57 @@
+CREATE TABLE STUDENT
+(	s_id VARCHAR(20) not null,
+	s_pwd VARCHAR(20) not null,
+	s_name VARCHAR(20) not null,
+	s_grade NUMBER not null,
+	s_major VARCHAR(50) not null,
+	CONSTRAINT student_pk PRIMARY KEY (s_id)
+);
+
+CREATE TABLE course(
+	c_id VARCHAR(20),
+	c_name VARCHAR(100),
+	c_id_no NUMBER,
+	c_time_start VARCHAR(20),
+	c_time_end VARCHAR(20),
+	c_day NUMBER,
+	c_unit NUMBER,
+	CONSTRAINT c_pk PRIMARY KEY (c_id, c_id_no)
+);
+
+CREATE TABLE enroll(
+	s_id VARCHAR(20),
+   	c_id VARCHAR(20),
+	c_id_no NUMBER,
+    	e_year NUMBER,
+    	e_semester NUMBER,
+    	CONSTRAINT e_pk PRIMARY KEY (s_id, c_id, c_id_no) ,
+	CONSTRAINT e_s_fk FOREIGN KEY(s_id)
+	REFERENCES student (s_id),
+   	CONSTRAINT e_c_fk FOREIGN KEY (c_id, c_id_no)
+   	REFERENCES  course (c_id, c_id_no)
+);
+
+CREATE TABLE teach
+(
+    p_id VARCHAR(20),
+    c_id VARCHAR(20),
+    c_id_no NUMBER,
+    t_year NUMBER,
+    t_semester NUMBER,
+    t_max NUMBER,
+    t_where VARCHAR(50),
+    CONSTRAINT t_pk PRIMARY KEY (p_id, c_id, c_id_no, t_year, t_semester),
+    CONSTRAINT t_p_fk FOREIGN KEY (p_id)
+    REFERENCES professor (p_id),
+    CONSTRAINT t_c_fk FOREIGN KEY (c_id, c_id_no) 
+    REFERENCES  course (c_id, c_id_no)
+ );
+
+CREATE TABLE professor
+(
+    p_id	VARCHAR(20) not null,
+    p_pwd    VARCHAR(20)   not null,
+    p_name  VARCHAR(20)   not null,
+    p_major  VARCHAR(50)   not null,
+    CONSTRAINT p_pk PRIMARY KEY (p_id)
+);
