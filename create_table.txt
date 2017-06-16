@@ -15,8 +15,6 @@ CREATE TABLE course(
 	c_time_end VARCHAR(20),
 	c_day NUMBER,
 	c_unit NUMBER,
-	c_max NUMBER,
-	c_where VARCHAR(50),
 	CONSTRAINT c_pk PRIMARY KEY (c_id, c_id_no)
 );
 
@@ -40,6 +38,8 @@ CREATE TABLE teach
     c_id_no NUMBER,
     t_year NUMBER,
     t_semester NUMBER,
+    t_max NUMBER,
+    t_where VARCHAR(50),
     CONSTRAINT t_pk PRIMARY KEY (p_id, c_id, c_id_no, t_year, t_semester),
     CONSTRAINT t_p_fk FOREIGN KEY (p_id)
     REFERENCES professor (p_id),
