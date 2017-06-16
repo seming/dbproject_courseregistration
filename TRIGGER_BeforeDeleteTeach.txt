@@ -1,0 +1,22 @@
+CREATE OR REPLACE TRIGGER BeforeDeleteTeach
+BEFORE
+DELETE ON teach
+FOR EACH ROW
+
+DECLARE
+	invalid_delete EXCEPTION;
+	cnt NUMBER;
+BEGIN
+	SELECT COUNT(*)
+	INTO cnt
+	FROM student;
+
+	IF (cnt > 0) THEN
+		RAISE invalid_delete;
+	END IF;
+
+EXCEPTION
+	WHEN invalid_delete THEN
+		RAISE_APPLICATION_ERROR (-20006, '수강생이 있어 삭제할 수 없습니다.');
+END;
+/
