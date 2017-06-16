@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%
 String session_id= (String)session.getAttribute("user");
+String session_identify= (String)session.getAttribute("identify");
 String log;
 if (session_id==null){
 	log="<a href=login.jsp>로그인</a>";
@@ -9,6 +10,23 @@ else log="<a href=logout.jsp>로그아웃</a>";
 %>
 <table width="75%" align="center" bgcolor="#FFFF99" border>
 <tr>
+
+<%
+if(session_id != null && session_identify.equals("professor")){
+
+%>
+<td align="center"><b><%=log%></b></td>
+<td align="center"><b><a href="update_professor.jsp">사용자 정보 수정</b></td>
+<td align="center"><b><a href="insert.jsp">강의과목 입력</b></td>
+<td align="center"><b><a href="delete.jsp">강의과목 삭제</b></td>
+<td align="center"><b><a href="select_professor.jsp">강의과목 조회</b></td>
+</tr>
+</table>
+
+<%
+}
+else{
+%>
 <td align="center"><b><%=log%></b></td>
 <td align="center"><b><a href="update.jsp">사용자 정보 수정</b></td>
 <td align="center"><b><a href="insert.jsp">수강신청 입력</b></td>
@@ -16,3 +34,6 @@ else log="<a href=logout.jsp>로그아웃</a>";
 <td align="center"><b><a href="select.jsp">수강신청 조회</b></td>
 </tr>
 </table>
+<%
+}
+%>

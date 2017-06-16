@@ -2,9 +2,6 @@
 <%@ page import="java.sql.*"  %>
 <html><head><title>수강신청 입력</title></head>
 <body>
-<%@ include file="top.jsp" %>
-<%   if (session_id==null) response.sendRedirect("login.jsp");  %>
-
 
 <%	
 	String s_id = (String)session.getAttribute("user");
@@ -24,26 +21,35 @@ String jdbc_driver = "oracle.jdbc.driver.OracleDriver";
 
 int resultnum;
 
-	try {
-		Class.forName(jdbc_driver);
-  	        myConn =  DriverManager.getConnection (dburl, user, passwd);
-    } catch(SQLException ex) {
-	     System.err.println("SQLException: " + ex.getMessage());
-    }
-	mySQL = "delete from enroll where s_id='" +s_id+"'";
+try {
+	Class.forName(jdbc_driver);
+    myConn =  DriverManager.getConnection (dburl, user, passwd);
+	stmt = myConn.createStatement();	
+} catch(SQLException ex) {
+     System.err.println("SQLException: " + ex.getMessage());
+}
+	
+	try  {  	
+		
+	mySQL = "Delete from enroll where c_id='" +c_id+"' and s_id ='"+s_id+"'";
 	
 	
-	System.out.println(c_id);
-	
-	resultnum = stmt.executeUpdate(mySQL);
-	System.out.println(resultnum);
-	
+	stmt.executeQuery(mySQL);
+	out.println("<script>alert('삭제되었습니다.');</script>");
 %>
 <script>	
-	alert("<%= result %>"); 
+	
 	location.href="select.jsp";
 </script>
 <%		
-stmt.close();  myConn.close();
+	} catch(SQLException ex) {		
+		 System.err.println("SQLException: " + ex.getMessage());
+	}  
+	finally {
+	    if (stmt != null) 
+           try { myConn.commit(); stmt.close();  myConn.close(); }
+	      catch(SQLException ex) { }
+    }
+
 %>
 </body></html>
