@@ -49,6 +49,12 @@ try {
 </script>
 <%		
 	} catch(SQLException ex) {		
+		 String sMessage=" ";
+	   	  if (ex.getErrorCode() == 20006){
+	   		  sMessage="수강생이 있어 삭제할 수 없습니다.";
+	   		  out.println("<script>alert('" +sMessage+"');</script>");
+	   		  out.println("<script>location.href= \"select_professor.jsp\";</script>");
+	   	  }
 		 System.err.println("SQLException: " + ex.getMessage());
 	}  
 	finally {
